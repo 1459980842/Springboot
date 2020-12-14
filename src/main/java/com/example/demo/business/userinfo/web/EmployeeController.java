@@ -9,10 +9,11 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @Api(tags = "用户管理相关接口")
 @RequestMapping("/user")
-public class EmployeeRest {
+public class EmployeeController {
 
 
     @Autowired
@@ -21,7 +22,7 @@ public class EmployeeRest {
     @ResponseBody
     @PostMapping("/getInfo")
     @ApiOperation(value = "获取数据库中所有用户信息", notes = "获取并返回所有用户信息")
-    public EmployeeJson map(@RequestBody EmployeeForm employeeForm) {
+    public EmployeeJson map(@RequestBody (required=false) EmployeeForm employeeForm) {
         return employeeService.selectByPrimaryKey(employeeForm);
     }
 
