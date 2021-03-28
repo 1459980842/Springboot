@@ -14,6 +14,7 @@ public class RedisTest {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+
     @PostMapping(value = "/test")
     public void test() {
         stringRedisTemplate.opsForValue().set("aaaa", "你好");
