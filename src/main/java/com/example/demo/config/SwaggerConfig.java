@@ -23,7 +23,7 @@ public class SwaggerConfig  extends WebMvcConfigurationSupport {
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.demo.business.userinfo.web"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.demo.business.*.web"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(new ApiInfoBuilder()
                         .title("SpringBoot整合Swagger")

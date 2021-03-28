@@ -7,6 +7,7 @@ import com.example.demo.business.userinfo.service.EmployeeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,6 +19,15 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    @PostMapping(value = "/test")
+    public void test() {
+        stringRedisTemplate.opsForValue().set("aaaa", "你好");
+    }
+
 
     @ResponseBody
     @PostMapping("/getInfo")
