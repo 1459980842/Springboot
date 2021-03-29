@@ -25,14 +25,19 @@ public class EmployeeController {
 
     @PostMapping(value = "/test")
     public void test() {
-        stringRedisTemplate.opsForValue().set("aaaa", "你好");
+        String a = "a";
+        String a1 = "a1";
+        System.out.println(a.equals(a1));
+        System.out.println(a.hashCode());
+        System.out.println(a1.hashCode());
+        stringRedisTemplate.opsForValue().set("aaaa", "你好2");
     }
 
 
     @ResponseBody
     @PostMapping("/getInfo")
     @ApiOperation(value = "获取数据库中所有用户信息", notes = "获取并返回所有用户信息")
-    public EmployeeJson map(@RequestBody (required=false) EmployeeForm employeeForm) {
+    public EmployeeJson map(@RequestBody(required = false) EmployeeForm employeeForm) {
         return employeeService.selectByPrimaryKey(employeeForm);
     }
 
