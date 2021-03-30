@@ -47,6 +47,7 @@ public class 回文数 {
 
     }
 
+
     public static void main(String[] args) {
         回文数 hui = new 回文数();
         hui.isPalindrome(1234321);
