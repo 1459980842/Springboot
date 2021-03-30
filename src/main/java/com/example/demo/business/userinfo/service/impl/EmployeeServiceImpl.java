@@ -6,9 +6,12 @@ import com.example.demo.business.userinfo.model.form.EmployeeForm;
 import com.example.demo.business.userinfo.model.json.EmployeeJson;
 import com.example.demo.business.userinfo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames = "employeejson")
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -16,12 +19,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
+    @Cacheable
     public EmployeeJson selectByPrimaryKey(EmployeeForm employeeForm) {
-        //此层写复杂的业务逻辑
-
-
-
-        //**********
         return employeeMapper.selectByPrimaryKey(employeeForm);
     }
 }

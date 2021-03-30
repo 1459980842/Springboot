@@ -1,8 +1,8 @@
 package com.example.demo.business.userinfo.model.json;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class EmployeeJson {
+public class EmployeeJson implements Serializable {
     private Integer id;
 
     private String name;
@@ -11,7 +11,24 @@ public class EmployeeJson {
 
     private String age;
 
+    public EmployeeJson() {
+    }
 
+    public EmployeeJson(Integer id, String name, String age) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeJson{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age='" + age + '\'' +
+                '}';
+    }
 
     public Integer getId() {
         return id;

@@ -7,7 +7,7 @@ import com.example.demo.business.userinfo.service.EmployeeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,24 +21,35 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisTemplate redisTemplate;
 
     @PostMapping(value = "/test")
     public void test() {
-        String a = "a";
-        String a1 = "a1";
-        System.out.println(a.equals(a1));
-        System.out.println(a.hashCode());
-        System.out.println(a1.hashCode());
-        stringRedisTemplate.opsForValue().set("aaaa", "你好2");
+        redisTemplate.setEnableTransactionSupport(true);
+        redisTemplate.multi();
+        redisTemplate.opsForValue().set("a1", "你好2");
+        redisTemplate.opsForValue().set("a2", "你好23");
+        redisTemplate.opsForValue().set("a3", "你好233");
+        redisTemplate.opsForValue().set("a4", "你好2333");
+        redisTemplate.opsForValue().set("a5", "你好2333");
+        redisTemplate.opsForValue().set("a6", "你好2333");
+        redisTemplate.opsForValue().set("a7", "你好2333");
+        redisTemplate.opsForValue().set("a8", "你好2333");
+        redisTemplate.opsForValue().set("a9", "a9");
+        redisTemplate.exec();
+
     }
 
 
     @ResponseBody
     @PostMapping("/getInfo")
     @ApiOperation(value = "获取数据库中所有用户信息", notes = "获取并返回所有用户信息")
-    public EmployeeJson map(@RequestBody(required = false) EmployeeForm employeeForm) {
-        return employeeService.selectByPrimaryKey(employeeForm);
+    public void map(@RequestBody(required = false) EmployeeForm employeeForm) {
+        EmployeeJson employeeJson = employeeService.selectByPrimaryKey(employeeForm);
+
+        EmployeeJson employeeJson2 = employeeService.selectByPrimaryKey(employeeForm);
+        System.out.println(employeeJson);
+        System.out.println(employeeJson2);
     }
 
 
